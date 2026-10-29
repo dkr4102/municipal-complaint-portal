@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Municipal Complaint Management System</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="landing-body">
+    <!-- Ambient Glass Orbs -->
+    <div class="ambient-glow ambient-glow-1"></div>
+    <div class="ambient-glow ambient-glow-2"></div>
+    <div class="ambient-glow ambient-glow-3"></div>
+
+    <!-- Top Bar -->
+    <header class="landing-top-bar glass-navbar">
+        <div class="landing-brand">
+            <div class="brand-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </div>
+            <div class="brand-text-block">
+                <div class="brand-title-row">
+                    <span class="brand-title">MUNICIPAL PORTAL</span>
+                    <span class="brand-chip landing-chip">SYSTEM SUITE</span>
+                </div>
+                <span class="brand-subtitle">Civic Grievance Redressal &amp; Workload Administration</span>
+            </div>
+        </div>
+        <div class="landing-header-right">
+            <button class="btn btn-outline-sm glass-header-btn" onclick="openLandingModal('modal-student-login')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Student Login</span>
+            </button>
+            <button class="btn btn-outline-sm glass-header-btn" onclick="openLandingModal('modal-register')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>New Register</span>
+            </button>
+            <button class="btn btn-primary btn-sm glass-header-btn" onclick="openLandingModal('modal-admin-login')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>Admin Login</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Content -->
+    <main class="landing-main">
+        <div class="landing-hero">
+            <div class="landing-pill">DBMS HACKATHON MINI PROJECT</div>
+            <h1 class="landing-title">Municipal Complaint Management System</h1>
+            <p class="landing-subtitle">Streamlined, transparent civic issue tracking powered by high-performance relational database architecture.</p>
+        </div>
+
+        <!-- 2 Large Choice Cards -->
+        <div class="dashboard-choice-grid">
+            <!-- STUDENT / CITIZEN CARD -->
+            <div class="choice-card user-choice-card glass-card">
+                <div class="choice-card-badge citizen-badge">STUDENT &bull; CITIZEN PORTAL</div>
+                <div class="choice-icon-wrap user-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h2 class="choice-card-title">STUDENT PORTAL</h2>
+                <div class="choice-card-tagline">Lodge &amp; Track Complaints</div>
+                <p class="choice-card-desc">
+                    Access your student grievance dashboard to report campus or civic problems, monitor live resolution milestones, inspect certified engineering fixes, and view complaint history.
+                </p>
+                <ul class="choice-features-list">
+                    <li><span class="check-bullet">&bull;</span> Secure student authentication &amp; fast registration</li>
+                    <li><span class="check-bullet">&bull;</span> Phone and email linked complaint tracking</li>
+                    <li><span class="check-bullet">&bull;</span> Live visual milestone timeline (Submitted &rarr; Resolved)</li>
+                    <li><span class="check-bullet">&bull;</span> Official resolution certificates &amp; remarks inspection</li>
+                </ul>
+
+                <!-- Student Login and New Register Actions -->
+                <div class="choice-actions-stack">
+                    <button class="btn btn-choice btn-user-choice" onclick="openLandingModal('modal-student-login')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                            <polyline points="10 17 15 12 10 7"></polyline>
+                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                        </svg>
+                        <span>Student Login</span>
+                    </button>
+                    <button class="btn btn-secondary btn-register-choice" onclick="openLandingModal('modal-register')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                        </svg>
+                        <span>New Register (Create Account)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ADMIN DASHBOARD CARD -->
+            <div class="choice-card admin-choice-card glass-card">
+                <div class="choice-card-badge admin-badge">MUNICIPAL OPERATIONS</div>
+                <div class="choice-icon-wrap admin-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                </div>
+                <h2 class="choice-card-title">ADMIN DASHBOARD</h2>
+                <div class="choice-card-tagline">Manage, Assign &amp; Resolve Complaints</div>
+                <p class="choice-card-desc">
+                    Restricted to municipal officers and administrators. Monitor live grievance aggregates, assign tasks to engineering departments, update workflow lifecycles, and commit certified resolutions.
+                </p>
+                <ul class="choice-features-list">
+                    <li><span class="check-bullet">&bull;</span> Real-time SQLite aggregate KPIs (Total, In Progress, Resolved)</li>
+                    <li><span class="check-bullet">&bull;</span> Department workload allocation &amp; re-assignment</li>
+                    <li><span class="check-bullet">&bull;</span> Mandatory resolution logging &amp; engineering closeout</li>
+                    <li><span class="check-bullet">&bull;</span> Full chronological audit trail (Table: complaint_history)</li>
+                </ul>
+
+                <!-- Admin Login Action -->
+                <div class="choice-actions-stack">
+                    <button class="btn btn-choice btn-admin-choice" onclick="openLandingModal('modal-admin-login')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <span>Admin Login</span>
+                    </button>
+                    <!-- Admin Credentials Callout -->
+                    <div class="admin-creds-callout">
+                        <span class="creds-label">Official Credentials:</span>
+                        <div class="creds-badges">
+                            <span class="badge badge-pk">Email: admin@gmail.com</span>
+                            <span class="badge badge-pk">Pass: admin@123</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Architecture Footnote -->
+        <div class="landing-architecture-box glass-card">
+            <div class="arch-col">
+                <span class="arch-label">Relational Database</span>
+                <span class="arch-value">municipal_complaints.db (SQLite 3)</span>
+            </div>
+            <div class="arch-col">
+                <span class="arch-label">Relational Schemas</span>
+                <span class="arch-value">users, citizens, categories, locations, departments, complaints, history, resolutions</span>
+            </div>
+            <div class="arch-col">
+                <span class="arch-label">Inspection Tool</span>
+                <span class="arch-value">Compatible with DB Browser for SQLite</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 1: STUDENT LOGIN -->
+    <!-- ========================================================================= -->
+    <div class="modal-overlay" id="modal-student-login">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title">Student / Citizen Login</h3>
+                    <p class="modal-subtitle">Access your registered complaints &amp; tracking history</p>
+                </div>
+                <button class="modal-close-btn" onclick="closeLandingModal('modal-student-login')">&times;</button>
+            </div>
+            <form id="form-student-login" onsubmit="handleStudentLogin(event)">
+                <div class="modal-body">
+                    <div id="student-login-error" class="auth-error-banner" style="display: none;"></div>
+                    <div class="form-group">
+                        <label for="student-login-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="student-login-email" required placeholder="e.g. student@gmail.com" value="student@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="student-login-password">Password <span class="required">*</span></label>
+                        <input type="password" id="student-login-password" required placeholder="Enter your password" value="student@123">
+                    </div>
+                    <div class="form-hint-row">
+                        <span class="hint-text">Default student demo: <code>student@gmail.com</code> / <code>student@123</code></span>
+                    </div>
+                </div>
+                <div class="modal-footer flex-between">
+                    <button type="button" class="btn-text-sm" onclick="switchModal('modal-student-login', 'modal-register')">New student? Register here &rarr;</button>
+                    <div style="display: flex; gap: 8px;">
+                        <button type="button" class="btn btn-secondary" onclick="closeLandingModal('modal-student-login')">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit-student-login">Login as Student</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 2: ADMIN LOGIN -->
+    <!-- ========================================================================= -->
+    <div class="modal-overlay" id="modal-admin-login">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title">Administrator Login</h3>
+                    <p class="modal-subtitle">Authorized Municipal Operations &bull; SQLite Control</p>
+                </div>
+                <button class="modal-close-btn" onclick="closeLandingModal('modal-admin-login')">&times;</button>
+            </div>
+            <form id="form-admin-login" onsubmit="handleAdminLogin(event)">
+                <div class="modal-body">
+                    <div id="admin-login-error" class="auth-error-banner" style="display: none;"></div>
+                    
+                    <div class="callout" style="margin-bottom: 6px;">
+                        <strong>Configured Admin Credentials:</strong><br>
+                        Email: <code>admin@gmail.com</code> &bull; Password: <code>admin@123</code>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admin-login-email">Admin Email <span class="required">*</span></label>
+                        <input type="email" id="admin-login-email" required placeholder="admin@gmail.com" value="admin@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-login-password">Password <span class="required">*</span></label>
+                        <input type="password" id="admin-login-password" required placeholder="admin@123" value="admin@123">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeLandingModal('modal-admin-login')">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="btn-submit-admin-login" style="background: #0f172a;">Authenticate Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 3: NEW REGISTER (STUDENT / CITIZEN) -->
+    <!-- ========================================================================= -->
+    <div class="modal-overlay" id="modal-register">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title">New Student / Citizen Registration</h3>
+                    <p class="modal-subtitle">Create an account to track all complaints under your name &amp; phone</p>
+                </div>
+                <button class="modal-close-btn" onclick="closeLandingModal('modal-register')">&times;</button>
+            </div>
+            <form id="form-register" onsubmit="handleRegister(event)">
+                <div class="modal-body">
+                    <div id="register-error" class="auth-error-banner" style="display: none;"></div>
+                    
+                    <div class="form-row two-col">
+                        <div class="form-group">
+                            <label for="reg-name">Full Name <span class="required">*</span></label>
+                            <input type="text" id="reg-name" required placeholder="e.g. Ramesh Kumar">
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-phone">Phone Number (10 digits) <span class="required">*</span></label>
+                            <input type="tel" id="reg-phone" required placeholder="e.g. 9845012345">
+                        </div>
+                    </div>
+
+                    <div class="form-row two-col">
+                        <div class="form-group">
+                            <label for="reg-email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="reg-email" required placeholder="e.g. ramesh@college.edu">
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">Password <span class="required">*</span></label>
+                            <input type="password" id="reg-password" required placeholder="Minimum 4 characters">
+                        </div>
+                    </div>
+                    
+                    <div class="form-hint-row">
+                        <span class="hint-text">Your phone number will be used to automatically correlate personal grievance records in the database.</span>
+                    </div>
+                </div>
+                <div class="modal-footer flex-between">
+                    <button type="button" class="btn-text-sm" onclick="switchModal('modal-register', 'modal-student-login')">&larr; Already registered? Student Login</button>
+                    <div style="display: flex; gap: 8px;">
+                        <button type="button" class="btn btn-secondary" onclick="closeLandingModal('modal-register')">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit-register">Create Account &amp; Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Client-side Logic for Auth -->
+    <script>
+        function openLandingModal(modalId) {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+            const target = document.getElementById(modalId);
+            if (target) {
+                target.classList.add('active');
+            }
+        }
+
+        function closeLandingModal(modalId) {
+            const target = document.getElementById(modalId);
+            if (target) {
+                target.classList.remove('active');
+            }
+        }
+
+        function switchModal(fromModal, toModal) {
+            closeLandingModal(fromModal);
+            setTimeout(() => openLandingModal(toModal), 150);
+        }
+
+        // Close on backdrop click
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Close on Escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+            }
+        });
+
+        function showLandingToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // 1. Student Login Handler
+        async function handleStudentLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('student-login-email').value.trim();
+            const password = document.getElementById('student-login-password').value.trim();
+            const errBanner = document.getElementById('student-login-error');
+            const submitBtn = document.getElementById('btn-submit-student-login');
+
+            errBanner.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="button-spinner"></span> Authenticating...';
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, role: 'student' })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || 'Login failed.');
+                }
+
+                // Store student phone in localStorage for automatic dashboard binding
+                if (data.user && data.user.phone) {
+                    localStorage.setItem('municipal_citizen_phone', data.user.phone);
+                }
+                showLandingToast('Login successful! Redirecting to Student Dashboard...', 'success');
+                setTimeout(() => {
+                    window.location.href = data.redirect || '/user';
+                }, 600);
+            } catch (err) {
+                errBanner.textContent = err.message;
+                errBanner.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Login as Student';
+            }
+        }
+
+        // 2. Admin Login Handler
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('admin-login-email').value.trim();
+            const password = document.getElementById('admin-login-password').value.trim();
+            const errBanner = document.getElementById('admin-login-error');
+            const submitBtn = document.getElementById('btn-submit-admin-login');
+
+            errBanner.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="button-spinner"></span> Authenticating...';
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, role: 'admin' })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || 'Authentication failed.');
+                }
+
+                showLandingToast('Admin authorized! Redirecting to Operations...', 'success');
+                setTimeout(() => {
+                    window.location.href = data.redirect || '/admin';
+                }, 600);
+            } catch (err) {
+                errBanner.textContent = err.message;
+                errBanner.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Authenticate Admin';
+            }
+        }
+
+        // 3. New Register Handler
+        async function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value.trim();
+            const phone = document.getElementById('reg-phone').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value.trim();
+            const errBanner = document.getElementById('register-error');
+            const submitBtn = document.getElementById('btn-submit-register');
+
+            errBanner.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="button-spinner"></span> Registering...';
+
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, email, password })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || 'Registration failed.');
+                }
+
+                // Store registered phone for seamless dashboard binding
+                if (phone) {
+                    localStorage.setItem('municipal_citizen_phone', phone);
+                }
+                showLandingToast('Account registered! Entering portal...', 'success');
+                setTimeout(() => {
+                    window.location.href = data.redirect || '/user';
+                }, 600);
+            } catch (err) {
+                errBanner.textContent = err.message;
+                errBanner.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Create Account & Login';
+            }
+        }
+
+        // Handle URL parameters (e.g. ?auth_modal=admin)
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const authModal = params.get('auth_modal');
+            const msg = params.get('msg');
+            if (authModal === 'admin') {
+                openLandingModal('modal-admin-login');
+                if (msg) {
+                    const errBanner = document.getElementById('admin-login-error');
+                    if (errBanner) {
+                        errBanner.textContent = msg;
+                        errBanner.style.display = 'block';
+                    }
+                }
+            } else if (authModal === 'student') {
+                openLandingModal('modal-student-login');
+            } else if (authModal === 'register') {
+                openLandingModal('modal-register');
+            }
+        });
+    </script>
+</body>
+</html>
