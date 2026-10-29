@@ -2,7 +2,13 @@
 
 A complete, simple, and professional **Municipal Complaint Management System** developed as a **DBMS Hackathon Mini Project**.
 
-## 🌟 Tech Stack
+🌐 **Live GitHub Pages URL**: [https://dkr4102.github.io/municipal-complaint-portal/](https://dkr4102.github.io/municipal-complaint-portal/)
+
+### 🔑 Default Credentials
+- **Admin**: `admin@gmail.com` / `admin@123`
+- **Student**: `student@gmail.com` / `student@123`
+
+---
 
 - **Frontend**: HTML5, CSS3, Vanilla JavaScript (Modern custom CSS, responsive dashboard design, zero heavy frontend frameworks)
 - **Backend**: Python 3.x, Flask

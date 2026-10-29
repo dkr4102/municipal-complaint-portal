@@ -738,6 +738,7 @@ async function logoutAdmin() {
     try {
         await fetch('/api/auth/logout', { method: 'POST' });
     } catch (e) {}
-    window.location.href = '/';
+    const isStatic = window.location.hostname.endsWith('github.io') || window.location.pathname.endsWith('.html');
+    window.location.href = isStatic ? 'index.html' : '/';
 }
 

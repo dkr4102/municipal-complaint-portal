@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="static/js/gh-pages-adapter.js"></script>
 </head>
 <body class="landing-body">
     <!-- Ambient Glass Orbs -->
@@ -381,7 +382,8 @@
                 }
                 showLandingToast('Login successful! Redirecting to Student Dashboard...', 'success');
                 setTimeout(() => {
-                    window.location.href = data.redirect || '/user';
+                    const fallback = window.location.pathname.endsWith('.html') ? 'user.html' : '/user';
+                    window.location.href = data.redirect || fallback;
                 }, 600);
             } catch (err) {
                 errBanner.textContent = err.message;
@@ -416,7 +418,8 @@
 
                 showLandingToast('Admin authorized! Redirecting to Operations...', 'success');
                 setTimeout(() => {
-                    window.location.href = data.redirect || '/admin';
+                    const fallback = window.location.pathname.endsWith('.html') ? 'admin.html' : '/admin';
+                    window.location.href = data.redirect || fallback;
                 }, 600);
             } catch (err) {
                 errBanner.textContent = err.message;
@@ -457,7 +460,8 @@
                 }
                 showLandingToast('Account registered! Entering portal...', 'success');
                 setTimeout(() => {
-                    window.location.href = data.redirect || '/user';
+                    const fallback = window.location.pathname.endsWith('.html') ? 'user.html' : '/user';
+                    window.location.href = data.redirect || fallback;
                 }, 600);
             } catch (err) {
                 errBanner.textContent = err.message;

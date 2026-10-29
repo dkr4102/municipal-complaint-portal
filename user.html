@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Municipal Complaint Management System</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <!-- Ambient Glass Orbs -->
+    <div class="ambient-glow ambient-glow-1"></div>
+    <div class="ambient-glow ambient-glow-2"></div>
+    <div class="ambient-glow ambient-glow-3"></div>
+
+    <div class="app-container">
+        <!-- TOP HEADER -->
+        <header class="app-header user-header glass-header">
+            <div class="header-left">
+                <div class="header-brand">
+                    <div class="brand-icon user-theme-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <div class="brand-text-block">
+                        <div class="brand-title-row">
+                            <span class="brand-title">MUNICIPAL PORTAL</span>
+                            <span class="brand-chip citizen-chip">CITIZEN</span>
+                        </div>
+                        <span class="brand-subtitle">Public Grievance Redressal</span>
+                    </div>
+                </div>
+                <div class="header-divider"></div>
+                <div class="header-breadcrumb">
+                    <span class="breadcrumb-item">Services</span>
+                    <span class="breadcrumb-sep">/</span>
+                    <span class="breadcrumb-active" id="user-current-breadcrumb">Dashboard</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="header-badge glass-badge">
+                    <span class="pulse-dot"></span>
+                    <span id="header-auth-badge">Student Access &bull; SQLite Active</span>
+                </div>
+                <button class="btn btn-primary btn-user-primary glass-btn-primary" onclick="switchUserView('submit')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>Lodge Complaint</span>
+                </button>
+                <button class="btn-logout" onclick="logoutUser()" title="Log out of session">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- MAIN APP BODY (SIDEBAR + CONTENT) -->
+        <div class="app-body">
+            <!-- USER SIDEBAR -->
+            <aside class="app-sidebar user-sidebar">
+                <div class="sidebar-header-label">USER DASHBOARD</div>
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" data-view="dashboard" onclick="switchUserView('dashboard')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="nav-item" data-view="submit" onclick="switchUserView('submit')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        <span>Submit Complaint</span>
+                    </button>
+                    <button class="nav-item" data-view="my-complaints" onclick="switchUserView('my-complaints')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span>My Complaints</span>
+                    </button>
+                    <button class="nav-item" data-view="track" onclick="switchUserView('track')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>Track Complaint</span>
+                    </button>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <a href="index.html" class="btn-back-home">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT PANELS -->
+            <main class="app-content">
+
+                <!-- 1. USER: DASHBOARD PAGE -->
+                <section class="view-panel active" id="user-view-dashboard">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="page-title">Citizen Grievance Dashboard</h1>
+                            <p class="page-subtitle">Track your municipal grievances and check resolution updates.</p>
+                        </div>
+                    </div>
+
+                    <!-- PHONE LOOKUP SEARCH CARD (NO AUTH NEEDED) -->
+                    <div class="phone-lookup-card">
+                        <div class="lookup-header">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="lookup-title">Identify Citizen by Phone Number</h3>
+                                <p class="lookup-subtitle">Enter your registered 10-digit mobile number to view personal complaints</p>
+                            </div>
+                        </div>
+                        <form id="form-user-dashboard-phone" class="lookup-form">
+                            <div class="input-action-group">
+                                <input type="tel" id="user-dashboard-phone-input" placeholder="e.g. 9845012345" required>
+                                <button type="submit" class="btn btn-primary">View My Complaints</button>
+                            </div>
+                        </form>
+                        <div class="lookup-greeting" id="user-greeting-box" style="display: none;">
+                            <span>Logged in as: <strong id="greeting-citizen-name">-</strong> (<span id="greeting-citizen-phone">-</span>)</span>
+                            <button class="btn-text-sm" onclick="clearUserPhone()">Change Phone</button>
+                        </div>
+                    </div>
+
+                    <!-- METRIC STAT CARDS -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper blue">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">MY COMPLAINTS</span>
+                                <h2 class="stat-value" id="user-stat-total">0</h2>
+                                <span class="stat-subtext">Total registered</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper gray">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">SUBMITTED</span>
+                                <h2 class="stat-value" id="user-stat-submitted">0</h2>
+                                <span class="stat-subtext">Awaiting assignment</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper amber">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">IN PROGRESS</span>
+                                <h2 class="stat-value" id="user-stat-progress">0</h2>
+                                <span class="stat-subtext">Field work active</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper green">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">RESOLVED</span>
+                                <h2 class="stat-value" id="user-stat-resolved">0</h2>
+                                <span class="stat-subtext">Certified resolution</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RECENT COMPLAINTS TABLE -->
+                    <div class="data-card">
+                        <div class="card-header flex-between">
+                            <div>
+                                <h3 class="card-title">Recent Complaints</h3>
+                                <p class="card-subtitle">Your recently submitted municipal issues</p>
+                            </div>
+                            <button class="btn btn-outline-sm" onclick="switchUserView('my-complaints')">View All My Complaints &rarr;</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table" id="user-dashboard-recent-table">
+                                <thead>
+                                    <tr>
+                                        <th>Complaint ID</th>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Submitted Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="7" class="text-center text-muted" style="padding: 24px;">Enter your phone number above to see your complaints.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. USER: SUBMIT COMPLAINT -->
+                <section class="view-panel" id="user-view-submit">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="page-title">Submit Municipal Complaint</h1>
+                            <p class="page-subtitle">Report a civic issue directly to municipal authorities for prompt investigation.</p>
+                        </div>
+                    </div>
+
+                    <!-- SUCCESS ALERT BANNER (HIDDEN INITIALLY) -->
+                    <div id="submit-success-banner" class="success-banner-card" style="display: none;">
+                        <div class="success-icon-wrap">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="success-banner-content">
+                            <h3>Complaint Submitted Successfully!</h3>
+                            <div class="success-meta-row">
+                                <span>Complaint ID: <strong id="success-display-id" class="badge badge-pk">CMP-0000</strong></span>
+                                <span>Status: <strong class="badge badge-status-SUBMITTED">SUBMITTED</strong></span>
+                            </div>
+                            <p>Your grievance has been logged in SQLite and queued for departmental allocation.</p>
+                            <div class="success-actions">
+                                <button class="btn btn-primary btn-sm" id="btn-success-track">Track This Complaint &rarr;</button>
+                                <button class="btn btn-secondary btn-sm" onclick="resetSubmitForm()">Submit Another</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUBMISSION FORM CARD -->
+                    <div class="data-card form-card-container">
+                        <form id="form-user-submit-complaint">
+                            <div class="form-grid">
+                                <!-- Citizen Info -->
+                                <div class="form-section-title">1. Citizen Contact Information</div>
+                                <div class="form-row two-col">
+                                    <div class="form-group">
+                                        <label for="submit-citizen-name">Citizen Name <span class="required">*</span></label>
+                                        <input type="text" id="submit-citizen-name" required placeholder="e.g. Ramesh Kumar">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="submit-citizen-phone">Phone Number <span class="required">*</span></label>
+                                        <input type="tel" id="submit-citizen-phone" required placeholder="e.g. 9845012345">
+                                    </div>
+                                </div>
+
+                                <!-- Issue Classification -->
+                                <div class="form-section-title">2. Grievance Details &amp; Classification</div>
+                                <div class="form-group">
+                                    <label for="submit-title">Complaint Title <span class="required">*</span></label>
+                                    <input type="text" id="submit-title" required placeholder="Short summary (e.g. Broken water pipe leaking on main road)">
+                                </div>
+                                <div class="form-row two-col">
+                                    <div class="form-group">
+                                        <label for="submit-category">Category <span class="required">*</span></label>
+                                        <select id="submit-category" required>
+                                            <option value="">Select Category...</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="submit-priority">Priority Level</label>
+                                        <select id="submit-priority">
+                                            <option value="LOW">LOW</option>
+                                            <option value="MEDIUM" selected>MEDIUM</option>
+                                            <option value="HIGH">HIGH</option>
+                                            <option value="URGENT">URGENT</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Location & Description -->
+                                <div class="form-section-title">3. Physical Location &amp; Description</div>
+                                <div class="form-group">
+                                    <label for="submit-location">Location / Ward <span class="required">*</span></label>
+                                    <select id="submit-location" required>
+                                        <option value="">Select Ward / Location...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="submit-description">Detailed Description <span class="required">*</span></label>
+                                    <textarea id="submit-description" rows="4" required placeholder="Describe the problem, severity, duration, and landmarks..."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-actions-footer">
+                                <button type="reset" class="btn btn-secondary">Clear Form</button>
+                                <button type="submit" class="btn btn-primary">Submit Complaint</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- 3. USER: MY COMPLAINTS -->
+                <section class="view-panel" id="user-view-my-complaints">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="page-title">My Registered Complaints</h1>
+                            <p class="page-subtitle">View all grievances registered under your mobile phone number.</p>
+                        </div>
+                    </div>
+
+                    <!-- SEARCH BY PHONE BAR -->
+                    <div class="filters-card">
+                        <form id="form-my-complaints-search" class="search-form-row">
+                            <div class="filter-group" style="flex: 1; max-width: 380px;">
+                                <label for="my-complaints-phone-input">Phone Number</label>
+                                <input type="tel" id="my-complaints-phone-input" placeholder="Enter Phone Number..." required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="margin-top: auto;">Search Complaints</button>
+                        </form>
+                    </div>
+
+                    <!-- COMPLAINTS DATA TABLE -->
+                    <div class="data-card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="user-my-complaints-table">
+                                <thead>
+                                    <tr>
+                                        <th>Complaint ID</th>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Submitted Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="8" class="text-center text-muted" style="padding: 28px;">Enter your phone number above and click Search.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. USER: TRACK COMPLAINT -->
+                <section class="view-panel" id="user-view-track">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="page-title">Track Complaint Status</h1>
+                            <p class="page-subtitle">Live inspection of complaint milestones, department updates, and resolution certificate.</p>
+                        </div>
+                    </div>
+
+                    <!-- TRACK SEARCH BAR -->
+                    <div class="filters-card">
+                        <form id="form-track-search" class="search-form-row">
+                            <div class="filter-group" style="flex: 1; max-width: 380px;">
+                                <label for="track-id-input">Complaint ID</label>
+                                <input type="text" id="track-id-input" placeholder="e.g. CMP-1001 or 1" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="margin-top: auto;">Track Complaint</button>
+                        </form>
+                    </div>
+
+                    <!-- TRACKING RESULT CONTAINER -->
+                    <div id="track-result-card" class="tracking-result-container" style="display: none;">
+                        <!-- COMPLAINT METADATA CARD -->
+                        <div class="data-card track-summary-card">
+                            <div class="track-summary-header">
+                                <div>
+                                    <div class="summary-id-badge" id="track-display-id">CMP-1001</div>
+                                    <h2 class="track-title" id="track-title">-</h2>
+                                </div>
+                                <div>
+                                    <span class="badge" id="track-status-badge">SUBMITTED</span>
+                                </div>
+                            </div>
+
+                            <div class="track-meta-grid">
+                                <div class="meta-cell">
+                                    <span class="meta-label">Category:</span>
+                                    <strong class="meta-val" id="track-category">-</strong>
+                                </div>
+                                <div class="meta-cell">
+                                    <span class="meta-label">Location:</span>
+                                    <strong class="meta-val" id="track-location">-</strong>
+                                </div>
+                                <div class="meta-cell">
+                                    <span class="meta-label">Assigned Department:</span>
+                                    <strong class="meta-val" id="track-department">Pending Assignment</strong>
+                                </div>
+                                <div class="meta-cell">
+                                    <span class="meta-label">Priority:</span>
+                                    <span class="badge" id="track-priority-badge">MEDIUM</span>
+                                </div>
+                                <div class="meta-cell">
+                                    <span class="meta-label">Current Status:</span>
+                                    <strong class="meta-val" id="track-current-status">-</strong>
+                                </div>
+                                <div class="meta-cell">
+                                    <span class="meta-label">Submitted On:</span>
+                                    <span class="meta-val" id="track-submitted-at">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VISUAL STATUS TIMELINE -->
+                        <div class="data-card timeline-card">
+                            <h3 class="card-title" style="margin-bottom: 20px;">Visual Status Timeline</h3>
+                            <div class="visual-stepper" id="visual-timeline-stepper">
+                                <!-- Dynamic Stepper Nodes -->
+                            </div>
+                        </div>
+
+                        <!-- RESOLUTION DETAILS SECTION -->
+                        <div class="data-card resolution-card-wrapper" id="track-resolution-container">
+                            <h3 class="card-title">Resolution Details</h3>
+                            <div id="resolution-content-box">
+                                <!-- Populated dynamically: either resolution details or "Resolution is not available yet." -->
+                            </div>
+                        </div>
+
+                        <!-- AUDIT HISTORY TIMELINE LOG -->
+                        <div class="data-card">
+                            <h3 class="card-title" style="margin-bottom: 14px;">Complete Chronological History (Table: complaint_history)</h3>
+                            <div class="table-responsive">
+                                <table class="data-table" id="track-history-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>Transition</th>
+                                            <th>Remarks</th>
+                                            <th>Updated By</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Dynamic Rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="static/js/gh-pages-adapter.js"></script>
+    <script src="static/js/user.js"></script>
+</body>
+</html>

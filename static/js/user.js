@@ -574,6 +574,7 @@ async function logoutUser() {
         await fetch('/api/auth/logout', { method: 'POST' });
     } catch (e) {}
     localStorage.removeItem('municipal_citizen_phone');
-    window.location.href = '/';
+    const isStatic = window.location.hostname.endsWith('github.io') || window.location.pathname.endsWith('.html');
+    window.location.href = isStatic ? 'index.html' : '/';
 }
 

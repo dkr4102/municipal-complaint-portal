@@ -54,18 +54,21 @@ def format_display_id(db_id):
 # HTML PAGE ROUTES
 # ==============================================================================
 @app.route("/")
+@app.route("/index.html")
 def home():
     """Landing Home Page with Student & Admin Login and Registration."""
     return render_template("index.html")
 
 
 @app.route("/user")
+@app.route("/user.html")
 def user_dashboard():
     """User Dashboard for citizens and students (submit, view, track grievances)."""
     return render_template("user.html")
 
 
 @app.route("/admin")
+@app.route("/admin.html")
 def admin_dashboard():
     """Admin Dashboard for municipal officers (manage, assign, resolve, audit)."""
     # Enforce admin authentication

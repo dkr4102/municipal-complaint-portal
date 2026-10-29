@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Municipal Complaint Management System</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <!-- Ambient Glass Orbs -->
+    <div class="ambient-glow ambient-glow-1"></div>
+    <div class="ambient-glow ambient-glow-2"></div>
+    <div class="ambient-glow ambient-glow-3"></div>
+
+    <div class="app-container">
+        <!-- TOP HEADER -->
+        <header class="app-header admin-header glass-header">
+            <div class="header-left">
+                <div class="header-brand">
+                    <div class="brand-icon admin-theme-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <div class="brand-text-block">
+                        <div class="brand-title-row">
+                            <span class="brand-title">MUNICIPAL PORTAL</span>
+                            <span class="brand-chip admin-chip">OPERATIONS</span>
+                        </div>
+                        <span class="brand-subtitle">Civic Grievance Administration &bull; RDBMS</span>
+                    </div>
+                </div>
+                <div class="header-divider"></div>
+                <div class="header-breadcrumb">
+                    <span class="breadcrumb-item">Administration</span>
+                    <span class="breadcrumb-sep">/</span>
+                    <span class="breadcrumb-active" id="admin-current-view-title">Dashboard</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="header-badge glass-badge">
+                    <span class="pulse-dot"></span>
+                    <span>Admin Mode &bull; DB Browser Compatible</span>
+                </div>
+                <button class="btn-logout" onclick="logoutAdmin()" title="Log out of admin session">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- MAIN APP BODY (SIDEBAR + CONTENT) -->
+        <div class="app-body">
+            <!-- ADMIN SIDEBAR -->
+            <aside class="app-sidebar admin-sidebar">
+                <div class="sidebar-header-label">ADMIN DASHBOARD</div>
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" data-view="dashboard" onclick="switchAdminView('dashboard')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="nav-item" data-view="complaints" onclick="switchAdminView('complaints')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                        <span>Complaints</span>
+                        <span class="nav-counter" id="admin-complaints-count">0</span>
+                    </button>
+                    <button class="nav-item" data-view="categories" onclick="switchAdminView('categories')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                        </svg>
+                        <span>Categories</span>
+                    </button>
+                    <button class="nav-item" data-view="departments" onclick="switchAdminView('departments')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                            <line x1="9" y1="22" x2="9" y2="22.01"></line>
+                            <line x1="15" y1="22" x2="15" y2="22.01"></line>
+                            <line x1="9" y1="18" x2="9" y2="18.01"></line>
+                            <line x1="15" y1="18" x2="15" y2="18.01"></line>
+                            <line x1="9" y1="14" x2="9" y2="14.01"></line>
+                            <line x1="15" y1="14" x2="15" y2="14.01"></line>
+                        </svg>
+                        <span>Departments</span>
+                    </button>
+                    <button class="nav-item" data-view="locations" onclick="switchAdminView('locations')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>Locations</span>
+                    </button>
+                    <button class="nav-item" data-view="history" onclick="switchAdminView('history')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>Complaint History</span>
+                    </button>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <a href="index.html" class="btn-back-home">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT PANELS -->
+            <main class="app-content">
+
+                <!-- 1. ADMIN: DASHBOARD -->
+                <section class="view-panel active" id="admin-view-dashboard">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="page-title">Administrator Overview</h1>
+                            <p class="page-subtitle">Real-time aggregate analytics from SQLite database (GROUP BY / COUNT).</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="loadAdminDashboardData()">Refresh Data</button>
+                    </div>
+
+                    <!-- 6 STAT CARDS -->
+                    <div class="stats-grid stats-grid-6">
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper blue">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">TOTAL COMPLAINTS</span>
+                                <h2 class="stat-value" id="admin-stat-total">0</h2>
+                                <span class="stat-subtext">All time filed</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper gray">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">SUBMITTED</span>
+                                <h2 class="stat-value" id="admin-stat-submitted">0</h2>
+                                <span class="stat-subtext">Awaiting action</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper cyan">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">ASSIGNED</span>
+                                <h2 class="stat-value" id="admin-stat-assigned">0</h2>
+                                <span class="stat-subtext">To department</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper amber">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">IN PROGRESS</span>
+                                <h2 class="stat-value" id="admin-stat-progress">0</h2>
+                                <span class="stat-subtext">Field execution</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper green">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">RESOLVED</span>
+                                <h2 class="stat-value" id="admin-stat-resolved">0</h2>
+                                <span class="stat-subtext">With resolution log</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper dark-gray">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">CLOSED</span>
+                                <h2 class="stat-value" id="admin-stat-closed">0</h2>
+                                <span class="stat-subtext">Archived cases</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ANALYTICS ROW -->
+                    <div class="dashboard-analytics-row">
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h3 class="card-title">Complaints by Category</h3>
+                            </div>
+                            <div class="card-body" id="admin-category-bars"></div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h3 class="card-title">Department Workload</h3>
+                            </div>
+                            <div class="card-body" id="admin-dept-bars"></div>
+                        </div>
+                    </div>
+
+                    <!-- RECENT COMPLAINTS TABLE -->
+                    <div class="data-card">
+                        <div class="card-header flex-between">
+                            <div>
+                                <h3 class="card-title">Recent Complaints</h3>
+                                <p class="card-subtitle">Latest grievances filed in municipal jurisdiction</p>
+                            </div>
+                            <button class="btn btn-outline-sm" onclick="switchAdminView('complaints')">View All &rarr;</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table" id="admin-recent-table">
+                                <thead>
+                                    <tr>
+                                        <th>Complaint ID</th>
+                                        <th>Citizen</th>
+                                        <th>Category</th>
+                                        <th>Department</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. ADMIN: COMPLAINTS MANAGEMENT -->
+                <section class="view-panel" id="admin-view-complaints">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="page-title">Complaint Management</h1>
+                            <p class="page-subtitle">View, search, assign departments, update statuses, add resolutions, and view audit history.</p>
+                        </div>
+                    </div>
+
+                    <!-- FILTERS BAR -->
+                    <div class="filters-card">
+                        <div class="filters-row">
+                            <div class="filter-group search-group">
+                                <label for="admin-filter-search">Search</label>
+                                <input type="text" id="admin-filter-search" placeholder="Search by ID, title, citizen, phone, location...">
+                            </div>
+                            <div class="filter-group">
+                                <label for="admin-filter-status">Status</label>
+                                <select id="admin-filter-status">
+                                    <option value="">All Statuses</option>
+                                    <option value="SUBMITTED">SUBMITTED</option>
+                                    <option value="ASSIGNED">ASSIGNED</option>
+                                    <option value="IN_PROGRESS">IN_PROGRESS</option>
+                                    <option value="RESOLVED">RESOLVED</option>
+                                    <option value="CLOSED">CLOSED</option>
+                                    <option value="REJECTED">REJECTED</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="admin-filter-priority">Priority</label>
+                                <select id="admin-filter-priority">
+                                    <option value="">All Priorities</option>
+                                    <option value="LOW">LOW</option>
+                                    <option value="MEDIUM">MEDIUM</option>
+                                    <option value="HIGH">HIGH</option>
+                                    <option value="URGENT">URGENT</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="admin-filter-category">Category</label>
+                                <select id="admin-filter-category">
+                                    <option value="">All Categories</option>
+                                </select>
+                            </div>
+                            <div class="filter-actions">
+                                <button class="btn btn-secondary btn-sm" id="btn-admin-reset-filters">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COMPLAINTS TABLE -->
+                    <div class="data-card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="admin-all-complaints-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Citizen</th>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Department</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Submitted Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. ADMIN: CATEGORIES -->
+                <section class="view-panel" id="admin-view-categories">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="page-title">Complaint Categories</h1>
+                            <p class="page-subtitle">Standard classifications for public grievances.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="openModal('modal-admin-add-category')">+ Add Category</button>
+                    </div>
+                    <div class="data-card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="admin-categories-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Category Name</th>
+                                        <th>Description</th>
+                                        <th>Complaints Filed</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. ADMIN: DEPARTMENTS -->
+                <section class="view-panel" id="admin-view-departments">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="page-title">Municipal Departments</h1>
+                            <p class="page-subtitle">Divisions responsible for investigation and engineering remediation.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="openModal('modal-admin-add-department')">+ Add Department</button>
+                    </div>
+                    <div class="data-card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="admin-departments-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Department Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Assigned Complaints</th>
+                                        <th>Active Workload</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. ADMIN: LOCATIONS -->
+                <section class="view-panel" id="admin-view-locations">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="page-title">Coverage Locations</h1>
+                            <p class="page-subtitle">Wards, street addresses, and municipal zones.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="openModal('modal-admin-add-location')">+ Add Location</button>
+                    </div>
+                    <div class="data-card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="admin-locations-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Address</th>
+                                        <th>Area / Ward</th>
+                                        <th>City</th>
+                                        <th>Pincode</th>
+                                        <th>Complaints Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. ADMIN: COMPLAINT HISTORY (AUDIT TRAIL) -->
+                <section class="view-panel" id="admin-view-history">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="page-title">Complaint History &amp; Audit Trail</h1>
+                            <p class="page-subtitle">Immutable log of status transitions, administrative remarks, and certifying actors.</p>
+                        </div>
+                        <div class="header-actions">
+                            <input type="text" id="admin-history-filter-id" class="input-sm" placeholder="Filter by Complaint ID...">
+                            <button class="btn btn-secondary btn-sm" onclick="loadAdminHistory()">Filter</button>
+                        </div>
+                    </div>
+                    <div class="data-card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="admin-history-table">
+                                <thead>
+                                    <tr>
+                                        <th>History ID</th>
+                                        <th>Complaint ID</th>
+                                        <th>Old Status</th>
+                                        <th>New Status</th>
+                                        <th>Remarks</th>
+                                        <th>Updated By</th>
+                                        <th>Updated At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 1: ASSIGN DEPARTMENT -->
+    <!-- ========================================================================= -->
+    <div class="modal-overlay" id="modal-assign-department">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Assign Department</h3>
+                <button class="modal-close-btn" onclick="closeModal('modal-assign-department')">&times;</button>
+            </div>
+            <form id="form-assign-department">
+                <div class="modal-body">
+                    <input type="hidden" id="assign-complaint-id">
+                    <div class="info-item" style="margin-bottom: 12px;">
+                        <span class="info-label">Complaint</span>
+                        <strong class="info-value" id="assign-display-title">-</strong>
+                    </div>
+                    <div class="info-item" style="margin-bottom: 12px;">
+                        <span class="info-label">Category</span>
+                        <span class="info-value" id="assign-category-name">-</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="assign-select-dept">Assign Department <span class="required">*</span></label>
+                        <select id="assign-select-dept" required>
+                            <option value="">Select Department...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="assign-remarks">Assignment Notes</label>
+                        <input type="text" id="assign-remarks" placeholder="e.g. Dispatched to Ward 4 field inspection team">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modal-assign-department')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Assign Department</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 2: UPDATE STATUS -->
+    <!-- ========================================================================= -->
+    <div class="modal-overlay" id="modal-update-status">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Update Complaint Status</h3>
+                <button class="modal-close-btn" onclick="closeModal('modal-update-status')">&times;</button>
+            </div>
+            <form id="form-update-status-admin">
+                <div class="modal-body">
+                    <input type="hidden" id="status-complaint-id">
+                    <div class="info-item" style="margin-bottom: 12px;">
+                        <span class="info-label">Complaint:</span>
+                        <strong class="info-value" id="status-display-title">-</strong>
+                    </div>
+                    <div class="info-item" style="margin-bottom: 12px;">
+                        <span class="info-label">Current Status:</span>
+                        <span class="badge" id="status-current-badge">SUBMITTED</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="status-new-select">New Status <span class="required">*</span></label>
+                        <select id="status-new-select" required>
+                            <option value="SUBMITTED">SUBMITTED</option>
+                            <option value="ASSIGNED">ASSIGNED</option>
+                            <option value="IN_PROGRESS">IN_PROGRESS</option>
+                            <option value="RESOLVED">RESOLVED</option>
+                            <option value="CLOSED">CLOSED</option>
+                            <option value="REJECTED">REJECTED</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status-remarks">Remarks / Reason</label>
+                        <input type="text" id="status-remarks" placeholder="e.g. Field inspection completed, work in progress">
+                    </div>
+                    <div class="form-group">
+                        <label for="status-updated-by">Updated By (Officer Name)</label>
+                        <input type="text" id="status-updated-by" placeholder="e.g. Municipal Executive Officer">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modal-update-status')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Status</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 3: ADD RESOLUTION -->
+    <!-- ========================================================================= -->
+    <div class="modal-overlay" id="modal-add-resolution">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Official Resolution Record</h3>
+                <button class="modal-close-btn" onclick="closeModal('modal-add-resolution')">&times;</button>
+            </div>
+            <form id="form-add-resolution-admin">
+                <div class="modal-body">
+                    <input type="hidden" id="res-complaint-id">
+                    <div class="info-item" style="margin-bottom: 12px;">
+                        <span class="info-label">Complaint:</span>
+                        <strong class="info-value" id="res-display-title">-</strong>
+                    </div>
+                    <div class="callout" style="margin-bottom: 14px;">
+                        <strong>Resolution Enforcement:</strong> Saving this resolution records the certificate in the <code>resolutions</code> table and automatically sets complaint status to <code>RESOLVED</code> with <code>resolved_at = CURRENT_TIMESTAMP</code>.
+                    </div>
+                    <div class="form-group">
+                        <label for="res-desc">Resolution Description <span class="required">*</span></label>
+                        <textarea id="res-desc" rows="3" required placeholder="Describe remedial actions taken (e.g. Garbage cleared, dustbins replaced, road resurfaced)..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="res-by">Resolved By (Department / Officer Name) <span class="required">*</span></label>
+                        <input type="text" id="res-by" required placeholder="e.g. Sanitation Department (Supervisor Ramesh)">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modal-add-resolution')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Resolution</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 4: VIEW HISTORY TIMELINE -->
+    <!-- ========================================================================= -->
+    <div class="modal-overlay" id="modal-view-history">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title" id="history-modal-title">Complaint Audit History</h3>
+                    <p class="modal-subtitle">Complete chronological lifecycle records (Table: complaint_history)</p>
+                </div>
+                <button class="modal-close-btn" onclick="closeModal('modal-view-history')">&times;</button>
+            </div>
+            <div class="modal-body modal-scrollable">
+                <div class="timeline" id="admin-complaint-timeline">
+                    <!-- Dynamic -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('modal-view-history')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODALS FOR MASTER DATA: CATEGORY, DEPARTMENT, LOCATION -->
+    <!-- ========================================================================= -->
+    <!-- Add Category Modal -->
+    <div class="modal-overlay" id="modal-admin-add-category">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Category</h3>
+                <button class="modal-close-btn" onclick="closeModal('modal-admin-add-category')">&times;</button>
+            </div>
+            <form id="form-admin-add-category">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="admin-cat-name">Category Name <span class="required">*</span></label>
+                        <input type="text" id="admin-cat-name" required placeholder="e.g. Stray Animals">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-cat-desc">Description</label>
+                        <textarea id="admin-cat-desc" rows="3" placeholder="Category scope and problems covered"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modal-admin-add-category')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Department Modal -->
+    <div class="modal-overlay" id="modal-admin-add-department">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Municipal Department</h3>
+                <button class="modal-close-btn" onclick="closeModal('modal-admin-add-department')">&times;</button>
+            </div>
+            <form id="form-admin-add-department">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="admin-dept-name">Department Name <span class="required">*</span></label>
+                        <input type="text" id="admin-dept-name" required placeholder="e.g. Public Health Department">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-dept-email">Email</label>
+                        <input type="email" id="admin-dept-email" placeholder="e.g. health@municipal.gov.in">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-dept-phone">Phone</label>
+                        <input type="tel" id="admin-dept-phone" placeholder="e.g. +91 98765 43219">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modal-admin-add-department')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Department</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Location Modal -->
+    <div class="modal-overlay" id="modal-admin-add-location">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Coverage Location</h3>
+                <button class="modal-close-btn" onclick="closeModal('modal-admin-add-location')">&times;</button>
+            </div>
+            <form id="form-admin-add-location">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="admin-loc-address">Address / Street <span class="required">*</span></label>
+                        <input type="text" id="admin-loc-address" required placeholder="e.g. 12th Cross, Main Road">
+                    </div>
+                    <div class="form-row two-col">
+                        <div class="form-group">
+                            <label for="admin-loc-area">Area / Ward <span class="required">*</span></label>
+                            <input type="text" id="admin-loc-area" required placeholder="e.g. Koramangala">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-loc-city">City <span class="required">*</span></label>
+                            <input type="text" id="admin-loc-city" required value="Bengaluru">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-loc-pincode">Pincode</label>
+                        <input type="text" id="admin-loc-pincode" placeholder="e.g. 560034">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modal-admin-add-location')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Location</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="static/js/gh-pages-adapter.js"></script>
+    <script src="static/js/admin.js"></script>
+</body>
+</html>
